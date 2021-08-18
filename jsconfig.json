@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/styled-components/*": ["src/styled-components/*"],
+      "@/common/*": ["src/styled-components/common/*"]
+    }
+  }
+}
