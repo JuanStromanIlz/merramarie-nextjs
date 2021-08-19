@@ -41,11 +41,11 @@ export async function getStaticProps() {
   let ogType = 'website';
   let ogImage = '/heart.png';
   let imageShow = null;
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/all`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/all`);
   const labels = await res.data;
   for (let i = 0; i < labels.length; i++) {
     const label = labels[i];
-    const promise = axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/${label}`);
+    const promise = axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${label}`);
     promises.push(promise);
   }
   const promisesList = await Promise.all(promises);

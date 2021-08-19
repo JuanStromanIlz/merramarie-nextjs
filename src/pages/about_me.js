@@ -22,9 +22,9 @@ const AboutMe = () => {
         <meta property='og:description' content='Desde Argentina con amor.'/>
         <meta name='twitter:description' content='Desde Argentina con amor.'/>
         {/* url */}
-        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}about_me`}/>
-        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}about_me`}/>
-        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}about_me`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/about_me`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/about_me`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/about_me`}/>
         {/* image */}
         <meta name='twitter:image' content='/heart.png'/>
         <meta name='twitter:image:secure_url' content='/heart.png'/>

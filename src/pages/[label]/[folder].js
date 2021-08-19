@@ -26,9 +26,9 @@ const FolderView = ({ogType, ogImage, folderInfo}) => {
         <meta property='og:description' content={folderInfo.description ? folderInfo.description : `${folderInfo.label}.`}/>
         <meta name='twitter:description' content={folderInfo.description ? folderInfo.description : `${folderInfo.label}.`}/>
         {/* url */}
-        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
-        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
-        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
         {/* image */}
         <meta name='twitter:image' content={ogImage}/>
         <meta name='twitter:image:secure_url' content={ogImage}/>
@@ -49,7 +49,7 @@ const FolderView = ({ogType, ogImage, folderInfo}) => {
 export async function getStaticProps({params}) {
   let ogType = 'website';
   let ogImage = '/heart.png';
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/${params.label}/${params.folder}`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${params.label}/${params.folder}`);
   const folderInfo = await res.data;
   /* find img in folder */
   if ('images' in folderInfo) {
@@ -70,11 +70,11 @@ export async function getStaticProps({params}) {
 export async function getStaticPaths() {
   const folders = [];
   const paths = [];
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/all`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/all`);
   const labels = await res.data;
   for (let i = 0; i < labels.length; i++) {
     const label = labels[i];
-    let res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/${label}`);
+    let res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${label}`);
     let foldersInLabel = await res.data;
     folders.push(...foldersInLabel);
   }

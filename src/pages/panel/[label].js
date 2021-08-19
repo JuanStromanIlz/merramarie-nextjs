@@ -20,7 +20,7 @@ const FolderPanelView = () => {
     try {
       let res = await axios({
         method: 'delete',
-        url: `${process.env.NEXT_PUBLIC_APIHOST}panel/delete/${label}/${folder}`,
+        url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/delete/${label}/${folder}`,
         withCredentials: true,
         headers: {
           'authorization': `Bearer ${token}`
@@ -77,7 +77,7 @@ const FolderPanelView = () => {
         }
         let res = await axios({
           method: 'patch',
-          url: `${process.env.NEXT_PUBLIC_APIHOST}panel/edit_new_imgs/${label}/${title}`,
+          url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/edit_new_imgs/${label}/${title}`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -97,7 +97,7 @@ const FolderPanelView = () => {
       try {
         let res = await axios({
           method: 'patch',
-          url: `${process.env.NEXT_PUBLIC_APIHOST}panel/edit/${label}/${title}`,
+          url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/edit/${label}/${title}`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -117,7 +117,7 @@ const FolderPanelView = () => {
   }
   useEffect(()=> {
     const fetchFolder = () => {
-      axios.get(`${process.env.NEXT_PUBLIC_APIHOST}panel/${label}/${folder}`, {
+      axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/panel/${label}/${folder}`, {
         withCredentials: true,
         headers: {
           'authorization': `Bearer ${token}`
@@ -148,9 +148,9 @@ const FolderPanelView = () => {
         <meta property='og:description' content='Edicion de la carpeta.'/>
         <meta name='twitter:description' content='Edicion de la carpeta.'/>
         {/* url */}
-        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
-        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
-        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
         {/* image */}
         <meta name='twitter:image' content='/heart.png'/>
         <meta name='twitter:image:secure_url' content='/heart.png'/>

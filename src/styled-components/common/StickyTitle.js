@@ -72,28 +72,28 @@ const StickyTitle = ({isFolder, share, folder, children}) => {
           <div id='mediaShare'>
             <div>
               <FacebookShareButton
-                url={`${process.env.NEXT_PUBLIC_FRONTEND}${folder.label}/${folder.route}`}
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/${folder.label}/${folder.route}`}
               >
                 <FacebookIcon iconFillColor='#f2d5d5' bgStyle={{fill: 'transparent'}} />
               </FacebookShareButton>
             </div>
             <div>
               <TwitterShareButton
-                url={`${process.env.NEXT_PUBLIC_FRONTEND}${folder.label}/${folder.route}`}
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/${folder.label}/${folder.route}`}
               >
                 <TwitterIcon iconFillColor='#f2d5d5' bgStyle={{fill: 'transparent'}} />
               </TwitterShareButton>
             </div>
             <div>
               <TumblrShareButton
-                url={`${process.env.NEXT_PUBLIC_FRONTEND}${folder.label}/${folder.route}`}
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/${folder.label}/${folder.route}`}
               >
                 <TumblrIcon iconFillColor='#f2d5d5' bgStyle={{fill: 'transparent'}} />
               </TumblrShareButton>
             </div>
             <div>
               <WhatsappShareButton
-                url={`${process.env.NEXT_PUBLIC_FRONTEND}${folder.label}/${folder.route}`}
+                url={`${process.env.NEXT_PUBLIC_FRONTEND}/${folder.label}/${folder.route}`}
               >
                 <WhatsappIcon iconFillColor='#f2d5d5' bgStyle={{fill: 'transparent'}} />
               </WhatsappShareButton>

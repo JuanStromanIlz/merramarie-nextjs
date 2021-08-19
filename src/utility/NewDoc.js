@@ -92,7 +92,7 @@ function NewDoc() {
         }
         let res = await axios({
           method: 'post',
-          url: `${process.env.REACT_APP_APIHOST}panel/new_with_imgs`,
+          url: `${process.env.REACT_APP_APIHOST}/panel/new_with_imgs`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -112,7 +112,7 @@ function NewDoc() {
       try {
         let res = await axios({
           method: 'post',
-          url: `${process.env.REACT_APP_APIHOST}panel/new`,
+          url: 'https://merramarieportfolio.herokuapp.com/panel/new',
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
