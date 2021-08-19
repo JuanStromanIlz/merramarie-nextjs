@@ -20,14 +20,14 @@ const FolderPanelView = () => {
     try {
       let res = await axios({
         method: 'delete',
-        url: `https://merramarieportfolio.herokuapp.com/panel/delete/${label}/${folder}`,
+        url: `https://merramarieportfolio.herokuapp.com/panel/delete/${folderInfo.label}/${folderInfo.route_title}`,
         withCredentials: true,
         headers: {
           'authorization': `Bearer ${token}`
         }
       });
       if (res) {
-        router.push(`/${folder.label}`);
+        router.push(`/${folderInfo.label}`);
       }
     } catch(err) {
       router.push('/error');
@@ -38,11 +38,11 @@ const FolderPanelView = () => {
     let newForm = values;
     delete newForm.images;
     let formToCompare = {
-      label: folder.label,
-      category: folder.category,
-      title: folder.title,
-      description: folder.description,
-      videoLink: folder.videoLink
+      label: folderInfo.label,
+      category: folderInfo.category,
+      title: folderInfo.title,
+      description: folderInfo.description,
+      videoLink: folderInfo.videoLink
     };
     let formToSave = {};
     //Check if there're new images
@@ -77,7 +77,7 @@ const FolderPanelView = () => {
         }
         let res = await axios({
           method: 'patch',
-          url: `https://merramarieportfolio.herokuapp.com/panel/edit_new_imgs/${label}/${title}`,
+          url: `https://merramarieportfolio.herokuapp.com/panel/edit_new_imgs/${folderInfo.label}/${folderInfo.route_title}`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -97,7 +97,7 @@ const FolderPanelView = () => {
       try {
         let res = await axios({
           method: 'patch',
-          url: `https://merramarieportfolio.herokuapp.com/panel/edit/${label}/${title}`,
+          url: `https://merramarieportfolio.herokuapp.com/panel/edit/${folderInfo.label}/${folderInfo.route_title}`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
