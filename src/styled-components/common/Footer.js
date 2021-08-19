@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Link from '@/common/Link';
+import Link from '@/styled-components/common/Link';
 
 const FooterContainer = styled.footer`
   .footerWrapper {
@@ -66,7 +66,7 @@ const Footer = ({label, nextFolder}) => {
   const [footer, setFooter] = useState(false);
 
   useEffect(() => {
-    let admin = localStorage.getItem(process.env.REACT_APP_LOCAL_STORAGE_NAME);
+    let admin = localStorage.getItem(process.env.NEXT_PUBLIC_LOCAL_STORAGE_NAME);
     if (admin) {
       setAdminRoutes(true);
     }
@@ -104,7 +104,7 @@ const Footer = ({label, nextFolder}) => {
             </li>
             {nextFolder ? 
               <li className='last'>
-                <Link href={adminRoutes ? `/panel/folder/${label}/${nextFolder.route_title}` : `/${label}/${nextFolder.route_title}`} className='link'>
+                <Link href={adminRoutes ? `/panel/${label}?folder=${nextFolder.route_title}` : `/${label}/${nextFolder.route_title}`} className='link'>
                   <h3>Siguiente</h3>  
                 </Link>
               </li>

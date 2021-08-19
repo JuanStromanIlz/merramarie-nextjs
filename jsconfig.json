@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@/styled-components/*": ["src/styled-components/*"],
-      "@/common/*": ["src/styled-components/common/*"]
+      "@/context/*": ["src/context/*"],
+      "@/utility/*": ["src/utility/*"]
     }
   }
 }

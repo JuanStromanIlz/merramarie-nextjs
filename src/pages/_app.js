@@ -1,7 +1,8 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { useState } from 'react';
 import Router from 'next/router';
-import Loading from '@/common/Loading';
+import Loading from '@/styled-components/common/Loading';
+import AdminContext from '@/context/AdminContext';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -118,12 +119,15 @@ function MyApp({ Component, pageProps }) {
   Router.onRouteChangeComplete = () => {
     setLoading(false);
   }
+  
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      {loading ? 
-      <Loading />: 
-      <Component {...pageProps} />}
+      <AdminContext>
+        <GlobalStyle />
+        {loading ? 
+        <Loading />: 
+        <Component {...pageProps} />}
+      </AdminContext>
     </ThemeProvider>
   )
 }

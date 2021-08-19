@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Link from '@/common/Link';
-import StickyTitle from '@/common/StickyTitle';
+import Link from '@/styled-components/common/Link';
+import StickyTitle from '@/styled-components/common/StickyTitle';
+import EmptyCard from '@/styled-components/EmptyCard';
 
 const Card = styled.div`
   cursor: pointer;
@@ -99,7 +100,7 @@ const Card = styled.div`
 
 const LabelCard = ({item, adminRoutes}) => {
   return (
-    <Link href={adminRoutes ? `/panel/${item.label}/${item.route_title}` : `/${item.label}/${item.route_title}`} className='link'>
+    <Link href={adminRoutes ? `/panel/${item.label}?folder=${item.route_title}` : `/${item.label}/${item.route_title}`} className='link'>
       <Card className='card__item'>
         {item.label === 'films' ? 
           item.videoLink ? 
@@ -165,7 +166,7 @@ const Label = ({name, label, adminRoutes}) => {
       <StickyTitle>{name}</StickyTitle>
       <div className='label__content'>
         {label.length === 0 ?
-          {/* <EmptyCard /> */}
+          <EmptyCard />
         :
         label.map((item, i) => 
           <LabelCard key={i} item={item} adminRoutes={adminRoutes} />

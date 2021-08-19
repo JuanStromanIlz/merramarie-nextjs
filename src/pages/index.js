@@ -1,29 +1,76 @@
 import Head from 'next/head';
+import Banner from '@/styled-components/Banner';
+import axios from 'axios';
 
-export default function Home() {
+const Home = ({imageShow, ogType, ogImage}) => {
   return (
     <div>
       <Head>
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <meta name='twitter:title' content='Merra Marie' />
-        <meta name='twitter:description' content='Desde Argentina con amor' />
-        <meta name='twitter:image' content='https://merramarie.vercel.app/heart.png' />
-        <meta name='twitter:image:secure_url' content='https://merramarie.vercel.app/heart.png' />
-        <meta property='og:image' content='https://merramarie.vercel.app/heart.png' />
-        <meta property='og:image:secure_url' content='https://merramarie.vercel.app/heart.png' />
-        <meta property='og:image:width' content='200' />
-        <meta property='og:image:height' content='200' />
-        <meta property='og:url' content='https://merramarie.vercel.app' />
-        <meta property='og:site_name' content='Merra Marie'/>
-        <meta property='og:title' content='Merra Marie Portfolio'/>
-        <meta property='og:type' content='website'/>
-        <meta
-          name='description'
-          content='Desde Argentina con amor'
-        />
+        {/* icon */}
+        <link rel='shortcut icon' href='/heart.svg'/>
+        {/* type */}
+        <meta property='og:type' content={ogType}/>
+        {/* title */}
         <title>Merra Marie</title>
+        <meta property='og:title' content='Merra Marie'/>
+        <meta name='twitter:title' content='Merra Marie'/>
+        {/* description */}
+        <meta name='description' content='Desde Argentina con amor.'/>
+        <meta property='og:description' content='Desde Argentina con amor.'/>
+        <meta name='twitter:description' content='Desde Argentina con amor.'/>
+        {/* url */}
+        <link rel='canonical' href={process.env.NEXT_PUBLIC_FRONTEND}/>
+        <meta property='og:url' content={process.env.NEXT_PUBLIC_FRONTEND}/>
+        <meta name='twitter:url' content={process.env.NEXT_PUBLIC_FRONTEND}/>
+        {/* image */}
+        <meta name='twitter:image' content={ogImage}/>
+        <meta name='twitter:image:secure_url' content={ogImage}/>
+        <meta property='og:image' content={ogImage}/>
+        <meta property='og:image:secure_url' content={ogImage}/>
+        <meta property='og:image:width' content={ogType !== 'website' ? 871 : 200}/>
+        <meta property='og:image:height' content={ogType !== 'website' ? 564 : 200}/>
       </Head>
-      <h1> NextJS Blog with Butter CMS</h1>
+      <Banner img={imageShow} />
     </div>
   );
 }
+
+export async function getStaticProps() {
+  const promises = [];
+  const urls = [];
+  let ogType = 'website';
+  let ogImage = '/heart.png';
+  let imageShow = null;
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/all`);
+  const labels = await res.data;
+  for (let i = 0; i < labels.length; i++) {
+    const label = labels[i];
+    const promise = axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/${label}`);
+    promises.push(promise);
+  }
+  const promisesList = await Promise.all(promises);
+  promisesList.filter(labels => {
+    labels.data.map(item => {
+      if ('images' in item) {
+        let images = Array.from(item.images);
+        images.map(image => urls.push(image.url));
+      }
+    });
+  });
+  if (urls.length > 0) {
+    imageShow = urls[Math.floor(Math.random() * (urls.length + 1))];
+    ogType = 'article';
+    ogImage = imageShow;
+  }
+
+  return {
+    props: {
+      imageShow,
+      ogType,
+      ogImage
+    },
+    revalidate: 60
+  }
+}
+
+export default Home;

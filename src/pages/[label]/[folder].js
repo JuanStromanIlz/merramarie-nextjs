@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import axios from 'axios';
-import Wrapper from '@/common/PageWrapper';
+import Wrapper from '@/styled-components/common/PageWrapper';
 import Footer from '@/styled-components/common/Footer';
 import Folder from '@/styled-components/Folder';
 import Nav from '@/styled-components/common/Nav';
@@ -22,13 +22,13 @@ const FolderView = ({ogType, ogImage, folderInfo}) => {
         <meta property='og:title' content={folderInfo.title}/>
         <meta name='twitter:title' content={folderInfo.title}/>
         {/* description */}
-        <meta name='description' content={folderInfo.description ? folderInfo.description : 'Ver online.'}/>
-        <meta property='og:description' content={folderInfo.description ? folderInfo.description : 'Ver online.'}/>
-        <meta name='twitter:description' content={folderInfo.description ? folderInfo.description : 'Ver online.'}/>
+        <meta name='description' content={folderInfo.description ? folderInfo.description : `${folderInfo.label}.`}/>
+        <meta property='og:description' content={folderInfo.description ? folderInfo.description : `${folderInfo.label}.`}/>
+        <meta name='twitter:description' content={folderInfo.description ? folderInfo.description : `${folderInfo.label}.`}/>
         {/* url */}
-        <link rel='canonical' href={`${process.env.REACT_APP_FRONTEND}${label}/${folder}`}/>
-        <meta property='og:url' content={`${process.env.REACT_APP_FRONTEND}${label}/${folder}`}/>
-        <meta name='twitter:url' content={`${process.env.REACT_APP_FRONTEND}${label}/${folder}`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}${label}/${folder}`}/>
         {/* image */}
         <meta name='twitter:image' content={ogImage}/>
         <meta name='twitter:image:secure_url' content={ogImage}/>
@@ -49,7 +49,7 @@ const FolderView = ({ogType, ogImage, folderInfo}) => {
 export async function getStaticProps({params}) {
   let ogType = 'website';
   let ogImage = '/heart.png';
-  const res = await axios.get(`${process.env.REACT_APP_APIHOST}public/${params.label}/${params.folder}`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/${params.label}/${params.folder}`);
   const folderInfo = await res.data;
   /* find img in folder */
   if ('images' in folderInfo) {
@@ -68,9 +68,22 @@ export async function getStaticProps({params}) {
 }
 
 export async function getStaticPaths() {
-
+  const folders = [];
+  const paths = [];
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/all`);
+  const labels = await res.data;
+  for (let i = 0; i < labels.length; i++) {
+    const label = labels[i];
+    let res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}public/${label}`);
+    let foldersInLabel = await res.data;
+    folders.push(...foldersInLabel);
+  }
+  for (let i = 0; i < folders.length; i++) {
+    const folder = folders[i];
+    paths.push({ params: {label: folder.label, folder: folder.route_title} });
+  }
   return { 
-    paths: [{ params: { label: 'artwork', folder: 'collages_manuales' } }], 
+    paths, 
     fallback: 'blocking' 
   }
 }

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Link from '@/common/Link';
-import { useState, useEffect } from 'react';
+import Link from '@/styled-components/common/Link';
+import { useState, useContext } from 'react';
+import { AdminCont } from '@/context/AdminContext';
 
 const Navbar = styled.nav`
   position: sticky;
@@ -184,7 +185,7 @@ const Navbar = styled.nav`
 
 const Nav = () => {
   const [menu, setMenu] = useState(false);
-  const [adminRoutes, setAdminRoutes] = useState(false);
+  const {token} = useContext(AdminCont);
   function openMenu() {
     if (!menu) {
       // Remove the title in the page
@@ -247,13 +248,6 @@ const Nav = () => {
     }
   }
 
-  useEffect(() => {
-    let admin = localStorage.getItem(process.env.REACT_APP_LOCAL_STORAGE_NAME);
-    if (admin) {
-      setAdminRoutes(true);
-    }
-  }, []);
-
   return (
     <Navbar>
       <div className='navWrapper'>
@@ -268,8 +262,8 @@ const Nav = () => {
             <li><Link className='navOption link' href='/publications'>publicaciones</Link></li>
             <li><Link className='navOption link' href='/about_me'>sobre mi</Link></li>
             <li><Link className='navOption link' href='/contact'>contacto</Link></li>
-            {adminRoutes && <li className='new'><Link className='navOption link' href='/panel/new'>nuevo</Link></li>}
-            {adminRoutes && <li><Link className='navOption link' href='/panel/log_out'>log out</Link></li>}
+            {token && <li className='new'><Link className='navOption link' href='/panel/new'>nuevo</Link></li>}
+            {token && <li><Link className='navOption link' href='/panel/log_out'>log out</Link></li>}
           </ul>
         </div>
         <div className='hamburgerMenu'>
@@ -289,8 +283,8 @@ const Nav = () => {
                 <li><Link href='/publications' className='link'>publicaciones</Link></li>
                 <li><Link href='/about_me' className='link'>sobre mi</Link></li>
                 <li><Link href='/contact' className='link'>contacto</Link></li>
-                {adminRoutes && <li className='new'><Link className='navOption link' href='/panel/new'>nuevo</Link></li>}
-                {adminRoutes && <li><Link className='navOption link' href='/panel/log_out'>log out</Link></li>}
+                {token && <li className='new'><Link className='navOption link' href='/panel/new'>nuevo</Link></li>}
+                {token && <li><Link className='navOption link' href='/panel/log_out'>log out</Link></li>}
               </ul>
             </div>
           </div>

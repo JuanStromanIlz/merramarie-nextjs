@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Linkify from 'react-linkify';
-import StickyTitle from '@/common/StickyTitle';
+import StickyTitle from '@/styled-components/common/StickyTitle';
 import ImageSlider from '@/styled-components/ImageSlider';
 
 const FolderContainer = styled.div`
