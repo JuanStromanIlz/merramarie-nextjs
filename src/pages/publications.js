@@ -25,9 +25,9 @@ const Publications = ({labelInfo}) => {
           <meta property='og:description' content='Trabajos destacados.'/>
           <meta name='twitter:description' content='Trabajos destacados.'/>
           {/* url */}
-          <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/publications`}/>
-          <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/publications`}/>
-          <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/publications`}/>
+          <link rel='canonical' href={`https://merramarie-next.vercel.app/publications`}/>
+          <meta property='og:url' content={`https://merramarie-next.vercel.app/publications`}/>
+          <meta name='twitter:url' content={`https://merramarie-next.vercel.app/publications`}/>
           {/* image */}
           <meta name='twitter:image' content='/heart.png'/>
           <meta name='twitter:image:secure_url' content='/heart.png'/>
@@ -45,7 +45,7 @@ const Publications = ({labelInfo}) => {
 }
 
 export async function getStaticProps() {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/publications`);
+  const res = await axios.get(`https://merramarieportfolio.herokuapp.com/public/publications`);
   const labelInfo = await res.data;
 
   return {

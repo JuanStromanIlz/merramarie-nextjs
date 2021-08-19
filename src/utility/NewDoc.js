@@ -92,7 +92,7 @@ function NewDoc() {
         }
         let res = await axios({
           method: 'post',
-          url: `${process.env.REACT_APP_APIHOST}/panel/new_with_imgs`,
+          url: 'https://merramarieportfolio.herokuapp.com/panel/new_with_imgs',
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -103,7 +103,7 @@ function NewDoc() {
           let title = values.title.trim();
           title = title.toLowerCase();
           title = title.replace(/ /g, '_');
-          router.push(`/panel/${values.label}/${title}`);
+          router.push(`/${values.label}/${title}`);
         }
       } catch(err) {
         router.push('/error');
@@ -123,7 +123,7 @@ function NewDoc() {
           let title = values.title.trim();
           title = title.toLowerCase();
           title = title.replace(/ /g, '_');
-          router.push(`/panel/${values.label}/${title}`);
+          router.push(`/${values.label}/${title}`);
         }
       } catch(err) {
         router.push('/error');

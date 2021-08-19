@@ -28,9 +28,9 @@ const LabelView = ({ogType, ogImage, labelName, labelInfo}) => {
         <meta property='og:description' content={labelName === 'Blog' ? 'Mi blog personal.' : 'Trabajos destacados.'}/>
         <meta name='twitter:description' content={labelName === 'Blog' ? 'Mi blog personal.' : 'Trabajos destacados.'}/>
         {/* url */}
-        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}`}/>
-        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}`}/>
-        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}`}/>
+        <link rel='canonical' href={`https://merramarie-next.vercel.app/${label}`}/>
+        <meta property='og:url' content={`https://merramarie-next.vercel.app/${label}`}/>
+        <meta name='twitter:url' content={`https://merramarie-next.vercel.app/${label}`}/>
         {/* image */}
         <meta name='twitter:image' content={ogImage}/>
         <meta name='twitter:image:secure_url' content={ogImage}/>
@@ -52,7 +52,7 @@ export async function getStaticProps({params}) {
   let ogType = 'website';
   let ogImage = '/heart.png';
   let labelName = 'Comercial';
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${labelToGet}`);
+  const res = await axios.get(`https://merramarieportfolio.herokuapp.com/public/${labelToGet}`);
   const labelInfo = await res.data;
   /* find img in label */
   let itemFilter = labelInfo.find(folder => folder.images);

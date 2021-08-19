@@ -18,7 +18,7 @@ const LogIn = () => {
   const router = useRouter();
   async function sendLogForm(values) {
     try {
-      let res = await axios.post(`${process.env.NEXT_PUBLIC_APIHOST}/panel/log_in`, values);
+      let res = await axios.post(`https://merramarieportfolio.herokuapp.com/panel/log_in`, values);
       if (res) {
         setToken(res.data);
         localStorage.setItem(process.env.NEXT_PUBLIC_LOCAL_STORAGE_NAME, res.data);
