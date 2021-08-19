@@ -104,8 +104,7 @@ const EditFolder = ({folder, sendEdit}) => {
               delete values[propName];
             }
           }
-          // sendEdit(values);
-          console.log(values);
+          sendEdit(values);
         }}
       >
         {({values, errors, touched, handleSubmit}) => (
