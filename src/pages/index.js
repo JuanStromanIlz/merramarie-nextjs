@@ -71,9 +71,8 @@ export async function getStaticProps() {
       }
     });
   });
-  console.log(urls);
   if (urls.length > 0) {
-    imageShow = urls[0];
+    imageShow = urls[Math.floor(Math.random() * (urls.length + 1))];
     ogType = 'article';
     ogImage = imageShow;
   }
