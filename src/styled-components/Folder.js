@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Linkify from 'react-linkify';
 import StickyTitle from '@/styled-components/common/StickyTitle';
 import ImageSlider from '@/styled-components/ImageSlider';
+import Image from 'next/image';
 
 const FolderContainer = styled.div`
   article {
@@ -20,23 +21,19 @@ const FolderContainer = styled.div`
         .image {
           cursor: pointer;
           overflow: hidden;
-          padding-top: 1.3rem;
-          padding-bottom: 1.3rem;
-          img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            backdrop-filter: invert(5%);
-            transition: .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          }
-        }
-        .bigImg {
-          grid-column-start: 1;
-          grid-column-end: 2;
-          img {
-            max-width: 900px;
-            display: block;
-            margin: 0 auto;
+          margin-top: 1.3rem;
+          margin-bottom: 1.3rem;
+          position: relative;
+          > div {
+            position: inherit !important; 
+            .folderImg {
+              position: inherit !important; 
+              height: 100% !important;
+              width: 100%;
+              object-fit: cover;
+              backdrop-filter: invert(5%);
+              transition: .3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
           }
         }
       }
@@ -57,14 +54,9 @@ const FolderContainer = styled.div`
       }
     }
   }
-  .lazyload-wrapper {
-    width: 100%;
-    height: 100%;
-    backdrop-filter: invert(5%);
-  }
   @media (hover: hover) {
     .image:hover {
-      img {
+      .folderImg {
         transform: scale(1.1);
       }
     }
@@ -73,21 +65,35 @@ const FolderContainer = styled.div`
   }
   }
   @media (min-width: 480px) {
-    .content__images {
+    article .content .content__images {
       grid-template-columns: repeat(2, calc(100% / 2)) !important;
       .image {
         aspect-ratio: 1;
-        padding-left: 1.3rem;
-        padding-right: 1.3rem;
+        margin-left: 1.3rem;
+        margin-right: 1.3rem;
+        > div {
+          position: absolute !important;
+          .folderImg { 
+            position: absolute !important;
+          }
+        }
       }
     }
   }
   @media (min-width: 920px) {
-    .content__images {
-      grid-template-columns: repeat(auto-fit, calc(100% / 4)) !important;
-    }
-    .content__text {
-      max-width: 60%;
+    article .content {
+      .content__images {
+        grid-template-columns: repeat(auto-fit, calc(100% / 4)) !important;
+        .image > div {
+          position: absolute !important;
+          .folderImg { 
+            position: absolute !important;
+          }
+        }
+      }
+      .content__text { 
+        max-width: 60vw;
+      }
     }
   }
 `;
@@ -147,7 +153,7 @@ const Folder = ({folder}) => {
                   <div className='content__images'>
                     {folder.images.map((img, i) => 
                       <div key={i} className='image'>
-                        <img onClick={() => openSlider(i)} width='100%' height='100%' src={img.url} alt={folder.title}></img>
+                      <Image className='folderImg' onClick={() => openSlider(i)} placeholder='blur' blurDataURL='/placeholder.png' layout='fill' priority={true} src={img.url} alt={folder.title} />
                       </div>
                     )}
                   </div> 
@@ -162,7 +168,7 @@ const Folder = ({folder}) => {
                   <div className='content__images'>
                     {folder.images.map((img, i) => 
                       <div key={i} className='image'>
-                        <img onClick={() => openSlider(i)} width='100%' height='100%' src={img.url} alt={folder.title}></img>
+                        <Image className='folderImg' onClick={() => openSlider(i)} placeholder='blur' blurDataURL='/placeholder.png' layout='fill' priority={true} src={img.url} alt={folder.title} />
                       </div>
                     )}
                   </div> 

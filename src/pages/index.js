@@ -6,6 +6,20 @@ const Home = ({imageShow, ogType, ogImage}) => {
   return (
     <div>
       <Head>
+        {/* fonts */}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" />
+        <meta charSet="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,200&display=swap" 
+          rel="stylesheet" />
+        {/* viewport */}
+        <meta charset='utf-8'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1'/>
+        <meta name='theme-color' content='#bd2929'/>
+        {/* keywords */}
+        <meta name='keywords' content='Merra Marie, Fotografia, Video, Artista Argentina, Freelance'/>
         {/* icon */}
         <link rel='shortcut icon' href='/heart.svg'/>
         {/* type */}
@@ -41,11 +55,11 @@ export async function getStaticProps() {
   let ogType = 'website';
   let ogImage = '/heart.png';
   let imageShow = null;
-  const res = await axios.get(`https://merramarieportfolio.herokuapp.com/public/all`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/all`);
   const labels = await res.data;
   for (let i = 0; i < labels.length; i++) {
     const label = labels[i];
-    const promise = axios.get(`https://merramarieportfolio.herokuapp.com/public/${label}`);
+    const promise = axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${label}`);
     promises.push(promise);
   }
   const promisesList = await Promise.all(promises);
@@ -57,8 +71,9 @@ export async function getStaticProps() {
       }
     });
   });
+  console.log(urls);
   if (urls.length > 0) {
-    imageShow = urls[Math.floor(Math.random() * (urls.length + 1))];
+    imageShow = urls[0];
     ogType = 'article';
     ogImage = imageShow;
   }

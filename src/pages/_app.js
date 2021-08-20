@@ -12,13 +12,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     font-size: 62.5%;
   }
-  ::-webkit-scrollbar {
-    background-color: #000;
-    width: 5px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #fff;
-  }
   ::selection {
     color: ${props => props.theme.colors.red};
     background-color: transparent;

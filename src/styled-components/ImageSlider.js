@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 const Slider = styled.div`
   display: none;
@@ -20,8 +21,11 @@ const Slider = styled.div`
       position: absolute;
       inset: 0;
       display: flex;
+      width: 90%;
+      height: 90%;
+      margin: auto;
       transition: .4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      img {
+      .sliderImg {
         object-fit: scale-down;
         width: 90%;
         height: 90%;
@@ -214,7 +218,7 @@ const ImageSlider = ({images, singleImg, open, setOpen}) => {
       <div className='imgContainer'>
         {index.map((img, i) => 
           <div key={i} className={`slider  ${indexCard === i ? 'slider__show' : null}`}>
-            <img src={img.url} alt='folder'></img>
+            <Image className='sliderImg' placeholder='blur' blurDataURL='/placeholder.png' layout='fill' src={img.url} alt='folder' />
           </div>
         )}
       </div>

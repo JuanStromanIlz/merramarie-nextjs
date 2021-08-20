@@ -15,6 +15,20 @@ const LabelView = ({ogType, ogImage, labelName, labelInfo}) => {
   return (
     <div>
       <Head>
+        {/* fonts */}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" />
+        <meta charSet="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,200&display=swap" 
+          rel="stylesheet" />
+        {/* viewport */}
+        <meta charset='utf-8'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1'/>
+        <meta name='theme-color' content='#bd2929'/>
+        {/* keywords */}
+        <meta name='keywords' content='Merra Marie, Fotografia, Video, Artista Argentina, Freelance'/>
         {/* icon */}
         <link rel='shortcut icon' href='/heart.svg'/>
         {/* type */}
@@ -28,9 +42,9 @@ const LabelView = ({ogType, ogImage, labelName, labelInfo}) => {
         <meta property='og:description' content={labelName === 'Blog' ? 'Mi blog personal.' : 'Trabajos destacados.'}/>
         <meta name='twitter:description' content={labelName === 'Blog' ? 'Mi blog personal.' : 'Trabajos destacados.'}/>
         {/* url */}
-        <link rel='canonical' href={`https://merramarie-next.vercel.app/${label}`}/>
-        <meta property='og:url' content={`https://merramarie-next.vercel.app/${label}`}/>
-        <meta name='twitter:url' content={`https://merramarie-next.vercel.app/${label}`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}`}/>
         {/* image */}
         <meta name='twitter:image' content={ogImage}/>
         <meta name='twitter:image:secure_url' content={ogImage}/>
@@ -52,7 +66,7 @@ export async function getStaticProps({params}) {
   let ogType = 'website';
   let ogImage = '/heart.png';
   let labelName = 'Comercial';
-  const res = await axios.get(`https://merramarieportfolio.herokuapp.com/public/${labelToGet}`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${labelToGet}`);
   const labelInfo = await res.data;
   /* find img in label */
   let itemFilter = labelInfo.find(folder => folder.images);

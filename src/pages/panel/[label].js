@@ -20,7 +20,7 @@ const FolderPanelView = () => {
     try {
       let res = await axios({
         method: 'delete',
-        url: `https://merramarieportfolio.herokuapp.com/panel/delete/${folderInfo.label}/${folderInfo.route_title}`,
+        url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/delete/${folderInfo.label}/${folderInfo.route_title}`,
         withCredentials: true,
         headers: {
           'authorization': `Bearer ${token}`
@@ -77,7 +77,7 @@ const FolderPanelView = () => {
         }
         let res = await axios({
           method: 'patch',
-          url: `https://merramarieportfolio.herokuapp.com/panel/edit_new_imgs/${folderInfo.label}/${folderInfo.route_title}`,
+          url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/edit_new_imgs/${folderInfo.label}/${folderInfo.route_title}`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -97,7 +97,7 @@ const FolderPanelView = () => {
       try {
         let res = await axios({
           method: 'patch',
-          url: `https://merramarieportfolio.herokuapp.com/panel/edit/${folderInfo.label}/${folderInfo.route_title}`,
+          url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/edit/${folderInfo.label}/${folderInfo.route_title}`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -117,7 +117,7 @@ const FolderPanelView = () => {
   }
   useEffect(()=> {
     const fetchFolder = () => {
-      axios.get(`https://merramarieportfolio.herokuapp.com/panel/${label}/${folder}`, {
+      axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/panel/${label}/${folder}`, {
         withCredentials: true,
         headers: {
           'authorization': `Bearer ${token}`
@@ -135,6 +135,12 @@ const FolderPanelView = () => {
   return (
     <div>
       <Head>
+        {/* viewport */}
+        <meta charset='utf-8'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1'/>
+        <meta name='theme-color' content='#bd2929'/>
+        {/* keywords */}
+        <meta name='keywords' content='Merra Marie, Fotografia, Video, Artista Argentina, Freelance'/>
         {/* icon */}
         <link rel='shortcut icon' href='/heart.svg'/>
         {/* type */}
@@ -148,9 +154,9 @@ const FolderPanelView = () => {
         <meta property='og:description' content='Edicion de la carpeta.'/>
         <meta name='twitter:description' content='Edicion de la carpeta.'/>
         {/* url */}
-        <link rel='canonical' href={`https://merramarie-next.vercel.app/${label}/${folder}`}/>
-        <meta property='og:url' content={`https://merramarie-next.vercel.app/${label}/${folder}`}/>
-        <meta name='twitter:url' content={`https://merramarie-next.vercel.app/${label}/${folder}`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
         {/* image */}
         <meta name='twitter:image' content='/heart.png'/>
         <meta name='twitter:image:secure_url' content='/heart.png'/>

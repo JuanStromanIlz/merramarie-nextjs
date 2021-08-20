@@ -13,6 +13,20 @@ const FolderView = ({ogType, ogImage, folderInfo}) => {
   return (
     <div>
       <Head>
+        {/* fonts */}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" />
+        <meta charSet="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,200&display=swap" 
+          rel="stylesheet" />
+        {/* viewport */}
+        <meta charset='utf-8'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1'/>
+        <meta name='theme-color' content='#bd2929'/>
+        {/* keywords */}
+        <meta name='keywords' content='Merra Marie, Fotografia, Video, Artista Argentina, Freelance'/>
         {/* icon */}
         <link rel='shortcut icon' href='/heart.svg'/>
         {/* type */}
@@ -26,9 +40,9 @@ const FolderView = ({ogType, ogImage, folderInfo}) => {
         <meta property='og:description' content={folderInfo.description ? folderInfo.description : `${folderInfo.label}.`}/>
         <meta name='twitter:description' content={folderInfo.description ? folderInfo.description : `${folderInfo.label}.`}/>
         {/* url */}
-        <link rel='canonical' href={`https://merramarie-next.vercel.app/${label}/${folder}`}/>
-        <meta property='og:url' content={`https://merramarie-next.vercel.app/${label}/${folder}`}/>
-        <meta name='twitter:url' content={`https://merramarie-next.vercel.app/${label}/${folder}`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/${label}/${folder}`}/>
         {/* image */}
         <meta name='twitter:image' content={ogImage}/>
         <meta name='twitter:image:secure_url' content={ogImage}/>
@@ -49,7 +63,7 @@ const FolderView = ({ogType, ogImage, folderInfo}) => {
 export async function getStaticProps({params}) {
   let ogType = 'website';
   let ogImage = '/heart.png';
-  const res = await axios.get(`https://merramarieportfolio.herokuapp.com/public/${params.label}/${params.folder}`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${params.label}/${params.folder}`);
   const folderInfo = await res.data;
   /* find img in folder */
   if ('images' in folderInfo) {
@@ -70,11 +84,11 @@ export async function getStaticProps({params}) {
 export async function getStaticPaths() {
   const folders = [];
   const paths = [];
-  const res = await axios.get(`https://merramarieportfolio.herokuapp.com/public/all`);
+  const res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/all`);
   const labels = await res.data;
   for (let i = 0; i < labels.length; i++) {
     const label = labels[i];
-    let res = await axios.get(`https://merramarieportfolio.herokuapp.com/public/${label}`);
+    let res = await axios.get(`${process.env.NEXT_PUBLIC_APIHOST}/public/${label}`);
     let foldersInLabel = await res.data;
     folders.push(...foldersInLabel);
   }

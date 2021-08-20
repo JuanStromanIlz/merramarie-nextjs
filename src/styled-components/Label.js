@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Link from '@/styled-components/common/Link';
 import StickyTitle from '@/styled-components/common/StickyTitle';
 import EmptyCard from '@/styled-components/EmptyCard';
+import Image from 'next/image';
 
 const Card = styled.div`
   cursor: pointer;
@@ -17,10 +18,10 @@ const Card = styled.div`
     aspect-ratio: 7 / 4;
     position: relative;
     overflow: hidden;
-    img, iframe {
+    .labelImg, iframe {
       filter: brightness(.62);
     }
-    img {
+    .labelImg {
       filter: brightness(.62);
       width: 100%;
       height: 100%;
@@ -67,10 +68,10 @@ const Card = styled.div`
   }
   @media (hover: hover) {
     :hover {
-      img, iframe {
+      .labelImg, iframe {
         filter: brightness(1);
       }
-      img {
+      .labelImg {
         transform: scale(1.1);
       }
       .cardInfo {
@@ -115,13 +116,13 @@ const LabelCard = ({item, adminRoutes}) => {
             </div>
           : 
           <div className='mediaContainer'>
-            <img src={item.images[0].url} alt={item.title}></img>
+            <Image className='labelImg' placeholder='blur' blurDataURL='/placeholder.png' layout='fill' priority={true}  src={item.images[0].url} alt={item.title} />
           </div>
         : 
           <>
             {item.images ? 
               <div className='mediaContainer'>
-                <img src={item.images[0].url} alt={item.title}></img>
+              <Image className='labelImg' placeholder='blur' blurDataURL='/placeholder.png' layout='fill' priority={true}  src={item.images[0].url} alt={item.title} />
               </div>
             : item.videoLink ?
               <div className='mediaContainer'>

@@ -8,6 +8,12 @@ const New = () => {
   return (
     <div>
       <Head>
+        {/* viewport */}
+        <meta charset='utf-8'/>
+        <meta name='viewport' content='width=device-width, initial-scale=1'/>
+        <meta name='theme-color' content='#bd2929'/>
+        {/* keywords */}
+        <meta name='keywords' content='Merra Marie, Fotografia, Video, Artista Argentina, Freelance'/>
         {/* icon */}
         <link rel='shortcut icon' href='/heart.svg'/>
         {/* type */}
@@ -21,9 +27,9 @@ const New = () => {
         <meta property='og:description' content='Desde Argentina con amor.'/>
         <meta name='twitter:description' content='Desde Argentina con amor.'/>
         {/* url */}
-        <link rel='canonical' href={`https://merramarie-next.vercel.app/new`}/>
-        <meta property='og:url' content={`https://merramarie-next.vercel.app/new`}/>
-        <meta name='twitter:url' content={`https://merramarie-next.vercel.app/new`}/>
+        <link rel='canonical' href={`${process.env.NEXT_PUBLIC_FRONTEND}/new`}/>
+        <meta property='og:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/new`}/>
+        <meta name='twitter:url' content={`${process.env.NEXT_PUBLIC_FRONTEND}/new`}/>
         {/* image */}
         <meta name='twitter:image' content='/heart.png'/>
         <meta name='twitter:image:secure_url' content='/heart.png'/>
