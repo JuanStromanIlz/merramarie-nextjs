@@ -92,7 +92,7 @@ function NewDoc() {
         }
         let res = await axios({
           method: 'post',
-          url: '${process.env.NEXT_PUBLIC_APIHOST}/panel/new_with_imgs',
+          url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/new_with_imgs`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
@@ -112,7 +112,7 @@ function NewDoc() {
       try {
         let res = await axios({
           method: 'post',
-          url: '${process.env.NEXT_PUBLIC_APIHOST}/panel/new',
+          url: `${process.env.NEXT_PUBLIC_APIHOST}/panel/new`,
           withCredentials: true,
           headers: {
             'authorization': `Bearer ${token}`
