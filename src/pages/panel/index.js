@@ -1,5 +1,6 @@
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
+import Head from 'next/head';
 import axios from 'axios';
 import Wrapper from '@/styled-components/common/PageWrapper';
 import StickyTitle from '@/styled-components/common/StickyTitle';
@@ -37,36 +38,48 @@ const LogIn = () => {
   }
 
   return (
-    <Wrapper>
-      <StickyTitle>Ingresar</StickyTitle>
-      <Formik
-        initialValues={{
-        username: '',
-        password: ''
-      }}
-      validationSchema={logInSchema}
-      onSubmit={(values, { resetForm }) => {
-          resetForm();
-          sendLogForm(values);
-      }}
-      >
-        {({errors, touched, handleSubmit}) => (
-          <Form onSubmit={handleSubmit}>
-            <div className={`formInput ${touched.username ? errors.username ? 'errorStyle' : 'okStyle' : null}`}>
-              <label htmlFor='username'>Usuario</label>
-              <Field name='username' autoComplete='off' />
-            </div>
-            <div className={`formInput ${touched.password ? errors.password ? 'errorStyle' : 'okStyle' : null}`}>
-              <label htmlFor='password'>Contraseña</label>
-              <Field name='password' type='password' autoComplete='off' />
-            </div>
-            <button type='submit'>
-              <span>Ingresar</span>
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </Wrapper>
+    <div>
+      <Head>
+        {/* fonts */}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet" />
+        <meta charSet="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin='true' />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,700;1,200&display=swap" 
+          rel="stylesheet" />
+      </Head>
+      <Wrapper>
+        <StickyTitle>Ingresar</StickyTitle>
+        <Formik
+          initialValues={{
+          username: '',
+          password: ''
+        }}
+        validationSchema={logInSchema}
+        onSubmit={(values, { resetForm }) => {
+            resetForm();
+            sendLogForm(values);
+        }}
+        >
+          {({errors, touched, handleSubmit}) => (
+            <Form onSubmit={handleSubmit}>
+              <div className={`formInput ${touched.username ? errors.username ? 'errorStyle' : 'okStyle' : null}`}>
+                <label htmlFor='username'>Usuario</label>
+                <Field name='username' autoComplete='off' />
+              </div>
+              <div className={`formInput ${touched.password ? errors.password ? 'errorStyle' : 'okStyle' : null}`}>
+                <label htmlFor='password'>Contraseña</label>
+                <Field name='password' type='password' autoComplete='off' />
+              </div>
+              <button type='submit'>
+                <span>Ingresar</span>
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </Wrapper>
+    </div>
   );
 }
 
