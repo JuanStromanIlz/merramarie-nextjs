@@ -114,10 +114,12 @@ const LabelCard = ({item, adminRoutes}) => {
                 allowFullScreen 
               ></iframe>
             </div>
-          : 
-          <div className='mediaContainer'>
-            <Image className='labelImg' placeholder='blur' blurDataURL='/placeholder.png' layout='fill' priority={true}  src={item.images[0].url} alt={item.title} />
-          </div>
+          : item.images ? 
+            <div className='mediaContainer'>
+              <Image className='labelImg' placeholder='blur' blurDataURL='/placeholder.png' layout='fill' priority={true}  src={item.images[0].url} alt={item.title} />
+            </div>
+          :
+          <div className='mediaContainer'></div>
         : 
           <>
             {item.images ? 
@@ -134,7 +136,9 @@ const LabelCard = ({item, adminRoutes}) => {
                   allowFullScreen 
                 ></iframe>
               </div>
-            : null}
+            : 
+              <div className='mediaContainer'></div>
+            }
           </>
         }
         <div className='cardInfo'>
