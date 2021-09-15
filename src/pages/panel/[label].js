@@ -87,6 +87,7 @@ const FolderPanelView = () => {
         if (res.status === 201) {
           let newTitle = values.title.trim();
           newTitle = newTitle.toLowerCase();
+          newtitle = newtitle.replace(/[^a-zA-Z ]/g, "");
           newTitle = newTitle.replace(/ /g, '_');
           router.push(`/panel/${values.label}?folder=${newTitle}`);
         }
@@ -106,7 +107,8 @@ const FolderPanelView = () => {
         });
         if (res.status === 201) {
           let newTitle = values.title.trim();
-          newTitle = newTitle.toLowerCase();
+          newTitle = newTitle.toLowerCase();         
+          newtitle = newtitle.replace(/[^a-zA-Z ]/g, "");
           newTitle = newTitle.replace(/ /g, '_');
           router.push(`/panel/${values.label}?folder=${newTitle}`);
         }

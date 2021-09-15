@@ -102,6 +102,7 @@ function NewDoc() {
         if (res.status === 201) {
           let title = values.title.trim();
           title = title.toLowerCase();
+          title = title.replace(/[^a-zA-Z ]/g, "");
           title = title.replace(/ /g, '_');
           router.push(`/${values.label}/${title}`);
         }
@@ -122,6 +123,7 @@ function NewDoc() {
         if (res.status === 201) {
           let title = values.title.trim();
           title = title.toLowerCase();
+          title = title.replace(/[^a-zA-Z ]/g, "");
           title = title.replace(/ /g, '_');
           router.push(`/${values.label}/${title}`);
         }
